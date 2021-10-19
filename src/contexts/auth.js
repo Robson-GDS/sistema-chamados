@@ -11,21 +11,19 @@ function AuthProvider({ children }) {
   useEffect(() => {
 
     function loadStorage() {
-      const storageUser = localStorage.getItem('SistemaUser');
+      const storageUser = localStorage.getItem('SistemaUsuario')
 
       if(storageUser) {
         setUser(JSON.parse(storageUser));
         setLoading(false);
       }
-
       setLoading(false);
     }
-
+    
     loadStorage();
-
   }, [])
 
-  return (
+  return(
     <AuthContext.Provider value={{ signed: !!user, user, loading }}>
       {children}
     </AuthContext.Provider>
