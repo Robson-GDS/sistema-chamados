@@ -11,7 +11,6 @@ export default function Dashboard() {
       <Header />
 
       <h1>Dashboard</h1>
-      <button onClick={() => signOut()} >Fazer logout</button>
     </div>
   )
 }
