@@ -23,11 +23,11 @@ function AuthProvider({ children }) {
     loadStorage();
   }, [])
 
-  async function signIn(email, password) {
+  async function signIn(email, password){
     setLoadingAuth(true);
 
     await firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(async (value) => {
+    .then( async (value) => {
       let uid = value.user.uid;
 
       const userProfile = await firebase.firestore().collection('users')
@@ -102,8 +102,11 @@ function AuthProvider({ children }) {
         signUp,
         signOut,
         signIn,
-        loadingAuth 
-    }}>
+        loadingAuth,
+        setUser,
+        storageUser 
+    }}
+    >
       {children}
     </AuthContext.Provider>
   )

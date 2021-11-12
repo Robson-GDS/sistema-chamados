@@ -5,17 +5,40 @@ import Header from '../../components/Header';
 import Title from '../../components/Title';
 import avatar from '../../assets/avatar.png';
 
+import firebase from '../../services/firebaseConnection';
 import { AuthContext } from '../../contexts/auth';
 
 import './profile.css';
 
 export default function Profile() {
-  const { user, signOut } = useContext(AuthContext);
+  const { user, signOut, setUser, storageUser } = useContext(AuthContext);
 
   const [nome, setNome] = useState(user && user.nome);
   const [email, setEmail] = useState(user && user.email);
 
   const [avatarUrl, setAvatarUrl] = useState(user && user.avatarUrl);
+  const [imageAvatar, setImageAvatar] = useState(null);
+
+  async function handleSave(event){
+    event.preventDefault();
+
+    if(imageAvatar === null && nome !== '') {
+      await firebase.firestore().collection('users')
+      .doc(user.uid)
+      .update({
+        nome: nome
+      })
+      .then(() => {
+        let data = {
+          ...user,
+          nome: nome
+        };
+        setUser(data);
+        storageUser(data);
+      })
+    }
+    
+  }
 
   return(
     <div>
@@ -26,7 +49,7 @@ export default function Profile() {
         </Title>
 
         <div className="container">
-          <form className="form-profile">
+          <form className="form-profile" onSubmit={handleSave}>
             <label className="label-avatar">
               <span>
                 <FiUpload color="#fff" size={25} />
