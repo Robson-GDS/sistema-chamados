@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { FiUser } from 'react-icons/fi'
+import { FiUser } from 'react-icons/fi';
+
+import firebase from '../../services/firebaseConnection';
 
 import Title from '../../components/Title';
 import Header from '../../components/Header';
@@ -11,9 +13,26 @@ export default function Customers() {
   const [cnpj, setCnpj] = useState('');
   const [endereco, setEndereco] = useState('');
 
-  function handleAdd(e) {
+  async function handleAdd(e) {
     e.preventDefault();
-    alert ('teste')
+    
+    if(nomeFantasia !== '' && cnpj !== '' && endereco !== '') {
+      await firebase.firestore().collection('customers')
+      .add({
+        nomeFantasia: nomeFantasia,
+        cnpj: cnpj,
+        endereco: endereco
+      })
+      .then(() => {
+        setNomeFantasia('');
+        setCnpj('');
+        setEndereco('');
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+    }
   }
 
   return (
