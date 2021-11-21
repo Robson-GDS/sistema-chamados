@@ -51,6 +51,7 @@ export default function Dashboard() {
                   <td data-label="Status">
                     <span className="badge" style={{backgroundColor:'#5cb85c'}}>Em aberto</span>
                   </td>
+                  <td data-label="Cadastro">21/11/2021</td>
                   <td data-label="#">
                     <button className="action" style={{backgroundColor: '#3583f6' }}>
                       <FiSearch color="#fff" size={17} />
