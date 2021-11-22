@@ -61,6 +61,8 @@ export default function New() {
               type="text"
               placeholder="Descreva seu problema (opcional)."
             />
+
+            <button type="submit">Registrar</button>
           </form>
         </div>
       </div>
