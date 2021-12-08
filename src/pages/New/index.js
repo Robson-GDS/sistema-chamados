@@ -56,10 +56,26 @@ export default function New() {
     loadCustomers();
   }, []);
 
-  function handleRegister(e) {
+  async function handleRegister(e) {
     e.preventDefault();
 
-    alert('TESTE')
+    await firebase.firestore().collection('chamados')
+    .add({
+      created: new Date(),
+      cliente: customers[customerSelected].nomeFantasia,
+      clienteId: customers[customerSelected].id,
+      assunto: assunto,
+      status: status,
+      complemento: complemento,
+      userId: user.uid
+    })
+    .then(() => {
+      setComplemento('');
+      setCustomersSelected(0);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   // chamado quando troca o assunto
