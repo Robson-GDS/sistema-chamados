@@ -125,22 +125,28 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td data-label="Cliente">Sujeito</td>
-                  <td data-label="Assunto">Suporte</td>
-                  <td data-label="Status">
-                    <span className="badge" style={{backgroundColor:'#5cb85c'}}>Em aberto</span>
-                  </td>
-                  <td data-label="Cadastro">21/11/2021</td>
-                  <td data-label="#">
-                    <button className="action" style={{backgroundColor: '#3583f6' }}>
-                      <FiSearch color="#fff" size={17} />
-                    </button>
-                    <button className="action" style={{backgroundColor: '#f6a935' }}>
-                      <FiSearch color="#fff" size={17} />
-                    </button>
-                  </td>
-                </tr>
+                {chamados.map((item, index) => {
+                  return(
+                    <tr key={index}>
+                      <td data-label="Cliente">{item.cliente}</td>
+                      <td data-label="Assunto">{item.assunto}</td>
+                      <td data-label="Status">
+                        <span className="badge" style={{backgroundColor: item.status === 'Aberto' ? '#5cb85c' : '#999'}}>
+                          {item.status}
+                        </span>
+                      </td>
+                      <td data-label="Cadastro">{item.createdFormated}</td>
+                      <td data-label="#">
+                        <button className="action" style={{backgroundColor: '#3583f6' }}>
+                          <FiSearch color="#fff" size={17} />
+                        </button>
+                        <button className="action" style={{backgroundColor: '#f6a935' }}>
+                          <FiSearch color="#fff" size={17} />
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </>
