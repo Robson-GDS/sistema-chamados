@@ -86,7 +86,7 @@ export default function New() {
   // chamado quando troca o status
   function handleOptionChange(e) {
     setStatus(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   }
 
   // chamado quando troca de cliente

@@ -149,6 +149,9 @@ export default function Dashboard() {
                 })}
               </tbody>
             </table>
+
+            <button className='btn-more' >Buscar mais</button>
+
           </>
         )}
 
