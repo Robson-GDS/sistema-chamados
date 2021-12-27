@@ -73,6 +73,15 @@ export default function Dashboard() {
 
   }
 
+  async function handleMore() {
+    setLoadingMore(true);
+    await listRef.startAfter(lastDocs).limit(5)
+    .get()
+    .then((snapshot) => {
+      updateState(snapshot)
+    })
+  }
+
   if(loading) {
     return(
       <div>
@@ -149,8 +158,9 @@ export default function Dashboard() {
                 })}
               </tbody>
             </table>
-
-            <button className='btn-more' >Buscar mais</button>
+            
+            {/* {loadingMore && <h3 style={{textAlign: 'center', marginTop: 15 }}>Buscando dados...</h3>} */}
+            { !loadingMore && !isEmpty && <button className='btn-more' onClick={handleMore}>Buscar mais</button> }
 
           </>
         )}
