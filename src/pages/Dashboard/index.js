@@ -82,6 +82,10 @@ export default function Dashboard() {
     })
   }
 
+  function togglePostModal(item) {
+    console.log(item)
+  }
+
   if(loading) {
     return(
       <div>
@@ -146,7 +150,7 @@ export default function Dashboard() {
                       </td>
                       <td data-label="Cadastro">{item.createdFormated}</td>
                       <td data-label="#">
-                        <button className="action" style={{backgroundColor: '#3583f6' }}>
+                        <button className="action" style={{backgroundColor: '#3583f6'}} onClick={() => togglePostModal(item)}>
                           <FiSearch color="#fff" size={17} />
                         </button>
                         <button className="action" style={{backgroundColor: '#f6a935' }}>
