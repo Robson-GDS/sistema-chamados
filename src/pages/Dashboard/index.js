@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiMessageSquare, FiPlus, FiSearch } from 'react-icons/fi';
+import { FiMessageSquare, FiPlus, FiSearch, FiEdit2 } from 'react-icons/fi';
 import { format } from 'date-fns';
 
 import firebase from '../../services/firebaseConnection';
+import Modal from '../../components/Modal';
 
 import Header from '../../components/Header';
 import Title from '../../components/Title';
@@ -18,6 +19,9 @@ export default function Dashboard() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [lastDocs, setLastDocs] = useState();
+
+  const [showPostModal, setShowPostModal] = useState(false);
+  const [detail, setDetail] = useState();
 
   useEffect(() => {
 
@@ -84,7 +88,8 @@ export default function Dashboard() {
   }
 
   function togglePostModal(item) {
-    console.log(item)
+    setShowPostModal(!showPostModal)
+    setDetail(item);
   }
 
   if(loading) {
@@ -155,7 +160,7 @@ export default function Dashboard() {
                           <FiSearch color="#fff" size={17} />
                         </button>
                         <button className="action" style={{backgroundColor: '#f6a935' }}>
-                          <FiSearch color="#fff" size={17} />
+                          <FiEdit2 color="#fff" size={17} />
                         </button>
                       </td>
                     </tr>
@@ -172,6 +177,14 @@ export default function Dashboard() {
 
         
       </div>
+
+      {showPostModal && (
+        <Modal
+          conteudo={detail}
+          close={togglePostModal}
+        />
+      )}
+
     </div>
   )
 }
