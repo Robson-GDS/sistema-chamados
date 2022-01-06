@@ -20,26 +20,27 @@ export default function Dashboard() {
   const [lastDocs, setLastDocs] = useState();
 
   useEffect(() => {
+
+    async function loadChamados() {
+      await listRef.limit(5)
+      .get()
+      .then((snapshot) => {
+        updateState(snapshot)
+      })
+      .catch((error) => {
+        console.log('Deu algum erro: ',error);
+        setLoadingMore(false);
+      })
+  
+      setLoading(false)
+    }
+
     loadChamados();
 
     return () => {
 
     }
   }, []);
-
-  async function loadChamados() {
-    await listRef.limit(5)
-    .get()
-    .then((snapshot) => {
-      updateState(snapshot)
-    })
-    .catch((error) => {
-      console.log('Deu algum erro: ',error);
-      setLoadingMore(false);
-    })
-
-    setLoading(false)
-  }
 
   async function updateState(snapshot) {
     const isCollectionEmpty = snapshot.size === 0;
